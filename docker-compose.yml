@@ -1,0 +1,14 @@
+services:
+ test-db:
+        image: postgres:15.0
+        container_name: financify-test-db
+        restart: always
+        environment:
+            POSTGRES_USER: test
+            POSTGRES_PASSWORD: test
+            POSTGRES_DB: financify
+        ports:
+            - "5333:5432"
+        volumes:
+            - ./backend/database/test-db/pgdata:/var/lib/postgresql/data
+            - ./backend/database/test-db/init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
