@@ -17,4 +17,5 @@ public class FinancifyDataContext : DbContext
     }
 
     public DbSet<Person> Persons { get; set; } = null!;
+    public DbSet<User> Users { get; set; } = null!;
 }
