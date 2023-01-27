@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financify.Core", "Financify
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financify.Models", "Financify.Models\Financify.Models.csproj", "{11F60CE4-1ABA-48C2-8841-83E99A7B954A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financify.Common", "Financify.Common\Financify.Common.csproj", "{8032EFBA-261F-4F40-894F-BB5458E3C148}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{11F60CE4-1ABA-48C2-8841-83E99A7B954A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11F60CE4-1ABA-48C2-8841-83E99A7B954A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11F60CE4-1ABA-48C2-8841-83E99A7B954A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8032EFBA-261F-4F40-894F-BB5458E3C148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8032EFBA-261F-4F40-894F-BB5458E3C148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8032EFBA-261F-4F40-894F-BB5458E3C148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8032EFBA-261F-4F40-894F-BB5458E3C148}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
