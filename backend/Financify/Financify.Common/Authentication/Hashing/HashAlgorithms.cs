@@ -7,15 +7,14 @@ public static class HashAlgorithms
 {
     public static string Sha256(string value)
     {
-        using (var sha256Hash = SHA256.Create())
-        {
-            // ComputeHash - returns byte array  
-            var bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(value));
+        // ComputeHash - returns byte array  
+        var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(value));
 
-            // Convert byte array to a string   
-            var builder = new StringBuilder();
-            for (var i = 0; i < bytes.Length; i++) builder.Append(bytes[i].ToString("x2"));
-            return builder.ToString();
-        }
+        // Convert byte array to a string   
+        var builder = new StringBuilder();
+        foreach (var t in bytes)
+            builder.Append(t.ToString("x2"));
+
+        return builder.ToString();
     }
 }
