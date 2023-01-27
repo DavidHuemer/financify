@@ -7,8 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Financify.Common\Financify.Common.csproj"/>
         <ProjectReference Include="..\Financify.Dal.Domain\Financify.Dal.Domain.csproj"/>
         <ProjectReference Include="..\Financify.Dal\Financify.Dal.csproj"/>
+        <ProjectReference Include="..\Financify.Models\Financify.Models.csproj"/>
     </ItemGroup>
 
 </Project>
