@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Financify.Dal.Domain.Persons;
+using Microsoft.EntityFrameworkCore;
 
 namespace Financify.Dal.db;
 
@@ -14,4 +15,6 @@ public class FinancifyDataContext : DbContext
     public FinancifyDataContext(DbContextOptions<FinancifyDataContext> options) : base(options)
     {
     }
+
+    public DbSet<Person> Persons { get; set; } = null!;
 }
