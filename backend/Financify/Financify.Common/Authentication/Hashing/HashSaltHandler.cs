@@ -16,8 +16,21 @@ public class HashSaltHandler : IHashSaltHandler
         algorithm ??= HashAlgorithms.Sha256;
 
         var salt = RandomStringGenerator.Generate(saltLength);
-        var combined = text + salt;
-        var hash = algorithm(combined);
+        var hash = GenerateHash(text, salt, algorithm);
         return new HashSalt(hash, salt);
+    }
+
+    public string GenerateHash(string text, string salt, IHashSaltHandler.HashingAlgorithm? algorithm = null)
+    {
+        algorithm ??= HashAlgorithms.Sha256;
+
+        var textWithSalt = text + salt;
+        return GenerateHash(textWithSalt, algorithm);
+    }
+
+    public string GenerateHash(string text, IHashSaltHandler.HashingAlgorithm? algorithm = null)
+    {
+        algorithm ??= HashAlgorithms.Sha256;
+        return algorithm(text);
     }
 }
