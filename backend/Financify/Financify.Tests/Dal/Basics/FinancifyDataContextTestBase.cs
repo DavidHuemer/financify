@@ -10,7 +10,7 @@ public abstract class FinancifyDataContextTestBase : IDisposable
     protected FinancifyDataContextTestBase()
     {
         var options = new DbContextOptionsBuilder<FinancifyDataContext>()
-            .UseInMemoryDatabase("Financify")
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
         Context = new FinancifyDataContext(options);
