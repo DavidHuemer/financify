@@ -32,4 +32,10 @@ public class UserRepository : IUserRepository
 
         return _db.Users.Where(x => x.Id == user.Id).Include(x => x.Person).First();
     }
+
+    public Task<User?> GetUserByEmailAddressAsync(string emailAddress)
+    {
+        return _db.Users
+            .Where(x => x.Person.Email == emailAddress).Include(x => x.Person).FirstOrDefaultAsync();
+    }
 }
