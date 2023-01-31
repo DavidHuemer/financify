@@ -23,17 +23,58 @@ public class UserRepositoryTests : FinancifyDataContextTestBase
         Assert.NotNull(_userRepository);
     }
 
-    [Fact]
-    public async void AddUserAsync_WithValidData_ReturnsUser()
+
+    private async Task<Person> AddPerson()
     {
-        await AddPerson();
+        const string email = "john.doe@test.com";
+        const string firstName = "John";
+        const string lastName = "Doe";
+
+        var person = new Person
+        {
+            Email = email,
+            FirstName = firstName,
+            LastName = lastName
+        };
+
+        await Context.Persons.AddAsync(person);
+        await Context.SaveChangesAsync();
+
+        return person;
+    }
+
+    private async Task<User> AddPersonAndUser()
+    {
+        var person = await AddPerson();
 
         const string passwordHash = "password";
         const string passwordSalt = "salt";
 
         var userCreationData = new UserCreationData
         {
-            PersonId = 1,
+            PersonId = person.Id,
+            Password = passwordHash,
+            Salt = passwordSalt
+        };
+
+        var user = await _userRepository.AddUserAsync(userCreationData);
+
+        return user;
+    }
+
+    #region Add User
+
+    [Fact]
+    public async void AddUserAsync_WithValidData_ReturnsUser()
+    {
+        var person = await AddPerson();
+
+        const string passwordHash = "password";
+        const string passwordSalt = "salt";
+
+        var userCreationData = new UserCreationData
+        {
+            PersonId = person.Id,
             Password = passwordHash,
             Salt = passwordSalt
         };
@@ -69,22 +110,35 @@ public class UserRepositoryTests : FinancifyDataContextTestBase
         Assert.Equal(person.LastName, user.Person.LastName);
     }
 
-    private async Task<Person> AddPerson()
+    #endregion
+
+    #region Get User By Email Address
+
+    [Fact]
+    public async void GetUserByEmailAddressAsync_WithValidData_ReturnsUser()
     {
-        const string email = "john.doe@test.com";
-        const string firstName = "John";
-        const string lastName = "Doe";
+        var user = await AddPersonAndUser();
+        var email = user.Person.Email;
 
-        var person = new Person
-        {
-            Email = email,
-            FirstName = firstName,
-            LastName = lastName
-        };
+        var userFromDb = await _userRepository.GetUserByEmailAddressAsync(email);
 
-        await Context.Persons.AddAsync(person);
-        await Context.SaveChangesAsync();
-
-        return person;
+        Assert.NotNull(userFromDb);
+        Assert.Equal(user.Id, userFromDb.Id);
+        Assert.Equal(user.Password, userFromDb.Password);
+        Assert.Equal(user.Salt, userFromDb.Salt);
+        Assert.Equal(user.Person.Email, userFromDb.Person.Email);
     }
+
+    [Fact]
+    public async void GetUserByEmailAddressAsync_WithInvalidData_ReturnsNull()
+    {
+        var user = await AddPersonAndUser();
+        var email = user.Person.Email;
+
+        var userFromDb = await _userRepository.GetUserByEmailAddressAsync(email + "invalid");
+
+        Assert.Null(userFromDb);
+    }
+
+    #endregion
 }

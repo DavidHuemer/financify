@@ -1,4 +1,5 @@
 using Financify.Common.Authentication.Hashing;
+using Financify.Common.Authentication.Jwt;
 using Financify.Core.Interfaces.Persons;
 using Financify.Core.Services.Persons;
 using Financify.Dal.db;
@@ -8,8 +9,14 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+if (builder.Environment.IsDevelopment())
+    Environment.SetEnvironmentVariable(JwtHandler.JwtKey, "example secret for jwt");
+
+
 builder.Services.AddDbContext<FinancifyDataContext>(o =>
     o.UseNpgsql(builder.Configuration.GetConnectionString("Financify_Test_DB")));
+
+builder.Services.AddSingleton<IJwtHandler, JwtHandler>();
 
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
