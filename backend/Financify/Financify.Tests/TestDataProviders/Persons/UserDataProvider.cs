@@ -1,5 +1,6 @@
 ﻿using Financify.Dal.Domain.Persons;
 using Financify.Models.Dtos.PersonDtos.UserDtos;
+using Financify.Models.Resources.PersonResources.UserResources;
 
 namespace Financify.Tests.TestDataProviders.Persons;
 
@@ -32,6 +33,15 @@ public static class UserDataProvider
         {
             Email = PersonDataProvider.DefaultEmail,
             Password = DefaultPassword
+        };
+    }
+
+    public static UserSignedInResource ProvideUserSignedInResource()
+    {
+        return new UserSignedInResource
+        {
+            UserId = 1,
+            Token = "default token"
         };
     }
 }
