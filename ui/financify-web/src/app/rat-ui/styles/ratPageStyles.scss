@@ -1,0 +1,14 @@
+@import "common";
+$pageBackground: gray;
+$authPageBackground: gray;
+
+.rat-page {
+  min-width: 100vw;
+  min-height: 100vh;
+  background: $pageBackground;
+}
+
+.rat-page.rat-auth-page {
+  background: $authPageBackground;
+  @include center;
+}

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
+import {RatUiModule} from "../rat-ui/rat-ui.module";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    RatUiModule
   ]
 })
 export class AuthModule { }
