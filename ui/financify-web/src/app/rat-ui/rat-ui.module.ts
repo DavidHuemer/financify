@@ -1,18 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RatAuthPageComponent } from './pages/rat-auth-page/rat-auth-page.component';
+import { RatRippleDirective } from './directives/ripple/rat-ripple.directive';
+import {MatRippleModule} from "@angular/material/core";
 
 
 
 @NgModule({
   declarations: [
-    RatAuthPageComponent
+    RatAuthPageComponent,
+    RatRippleDirective
   ],
   exports: [
-    RatAuthPageComponent
+    RatAuthPageComponent,
+    RatRippleDirective
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatRippleModule
   ]
 })
 export class RatUiModule { }
